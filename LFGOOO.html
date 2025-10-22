@@ -47,7 +47,7 @@
     }
     button:active { transform: scale(0.98); }
 
-    /* Plein écran (zoom image) */
+    /* Plein écran */
     .fullscreen {
       position: fixed;
       top: 0; left: 0;
@@ -61,26 +61,22 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    .fullscreen.active {
-      visibility: visible;
-      opacity: 1;
-    }
+    .fullscreen.active { visibility: visible; opacity: 1; }
     .fullscreen img {
-      max-width: 90%;
-      max-height: 90%;
+      max-width: 90%; max-height: 90%;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      transition: transform 0.3s ease;
+      transform: scale(0.95);
     }
+    .fullscreen.active img { transform: scale(1); }
+
     .nav-btn {
-      position: absolute;
-      top: 50%;
+      position: absolute; top: 50%;
       transform: translateY(-50%);
-      font-size: 2rem;
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      padding: 16px;
+      font-size: 2rem; background: none;
+      border: none; color: white;
+      cursor: pointer; padding: 16px;
       user-select: none;
     }
     .nav-btn:hover { color: #00c9ff; }
@@ -105,7 +101,7 @@
   <p class="subtitle">Parce que j’ai passé mes meilleures années lycéennes avec vous !</p>
 
   <div class="grid">
-    <!-- Exemple : Bruxelles -->
+    <!-- Bruxelles -->
     <div class="theme">
       <h2>Bruxelles</h2>
       <figure class="diaporama" onclick="openFullscreen(['bruxelles1.jpg','bruxelles2.jpg','bruxelles3.jpg'], 0)">
@@ -118,7 +114,57 @@
       </div>
     </div>
 
-    <!-- Autres sections à copier si besoin -->
+    <!-- Walibi 2024 -->
+    <div class="theme">
+      <h2>Walibi 2024</h2>
+      <figure class="diaporama" onclick="openFullscreen(['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg'], 0)">
+        <img src="walibi2024_1.jpg" alt="Walibi 2024">
+        <figcaption>LFGOO à Walibi ! 😱</figcaption>
+      </figure>
+      <div class="controls">
+        <button onclick="changeImage(this, ['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg'])">➡</button>
+      </div>
+    </div>
+
+    <!-- Ski -->
+    <div class="theme">
+      <h2>Ski</h2>
+      <figure class="diaporama" onclick="openFullscreen(['ski1.jpg','ski2.jpg','ski3.jpg'], 0)">
+        <img src="ski1.jpg" alt="Ski">
+        <figcaption>⛷️ Ski</figcaption>
+      </figure>
+      <div class="controls">
+        <button onclick="changeImage(this, ['ski1.jpg','ski2.jpg','ski3.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['ski1.jpg','ski2.jpg','ski3.jpg'])">➡</button>
+      </div>
+    </div>
+
+    <!-- Walibi 2025 -->
+    <div class="theme">
+      <h2>Walibi 2025</h2>
+      <figure class="diaporama" onclick="openFullscreen(['walibi2025_1.jpg','walibi2025_2.jpg'], 0)">
+        <img src="walibi2025_1.jpg" alt="Walibi 2025">
+        <figcaption>🎢 Walibi 2025</figcaption>
+      </figure>
+      <div class="controls">
+        <button onclick="changeImage(this, ['walibi2025_1.jpg','walibi2025_2.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['walibi2025_1.jpg','walibi2025_2.jpg'])">➡</button>
+      </div>
+    </div>
+
+    <!-- Autres moments -->
+    <div class="theme">
+      <h2>Autres moments</h2>
+      <figure class="diaporama" onclick="openFullscreen(['autres_1.jpg','autres_2.jpg','autres_3.jpg'], 0)">
+        <img src="autres_1.jpg" alt="Autres">
+        <figcaption>Repas surprise 🍽️</figcaption>
+      </figure>
+      <div class="controls">
+        <button onclick="changeImage(this, ['autres_1.jpg','autres_2.jpg','autres_3.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['autres_1.jpg','autres_2.jpg','autres_3.jpg'])">➡</button>
+      </div>
+    </div>
   </div>
 
   <!-- Plein écran -->
@@ -134,7 +180,6 @@
     let fsImages = [];
     let fsIndex = 0;
 
-    // Fonction de changement manuel
     function changeImage(button, images) {
       const figure = button.closest('.theme').querySelector('.diaporama img');
       const currentSrc = figure.getAttribute('src');
@@ -148,7 +193,6 @@
       }, 360);
     }
 
-    // Auto diaporama (pause/reprise)
     document.querySelectorAll('.theme').forEach(theme => {
       const imgs = Array.from(theme.querySelectorAll('button'))[0]?.onclick.toString().match(/'([^']+)'/g)?.map(x => x.replace(/'/g, ''));
       if (!imgs) return;
@@ -167,11 +211,8 @@
       diaporamas.push({ interval });
     });
 
-    // Plein écran
     function openFullscreen(images, index) {
-      // 🟢 Stop tous les diaporamas
-      diaporamas.forEach(d => clearInterval(d.interval));
-
+      diaporamas.forEach(d => clearInterval(d.interval)); // pause auto
       fsImages = images;
       fsIndex = index;
       const fs = document.getElementById('fullscreen');
@@ -181,8 +222,7 @@
 
     function closeFullscreen() {
       document.getElementById('fullscreen').classList.remove('active');
-      // 🟢 Relancer les diaporamas après 0.5s
-      setTimeout(() => restartSlides(), 500);
+      setTimeout(() => restartSlides(), 500); // reprise auto
     }
 
     function restartSlides() {
@@ -204,7 +244,6 @@
       });
     }
 
-    // Navigation dans le plein écran
     function navigateFullscreen(dir) {
       fsIndex = (fsIndex + dir + fsImages.length) % fsImages.length;
       const img = document.getElementById('fullscreen').querySelector('img');
@@ -215,7 +254,6 @@
       }, 200);
     }
 
-    // Navigation clavier
     document.addEventListener('keydown', e => {
       const fs = document.getElementById('fullscreen');
       if (!fs.classList.contains('active')) return;
