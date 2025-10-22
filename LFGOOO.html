@@ -28,13 +28,13 @@
     h2 { font-size: 1.15rem; margin: 0 0 12px; text-decoration: underline; }
 
     .diaporama { position: relative; width: 100%; max-width: 320px; margin: 0 auto; cursor: pointer; }
-    .diaporama img, .diaporama video {
+    .diaporama img {
       width: 100%; height: 250px; object-fit: cover;
       border-radius: 10px;
       box-shadow: 0 6px 14px rgba(0,0,0,0.25);
       transition: opacity 360ms ease, transform 360ms ease;
     }
-    .diaporama img.fade-out, .diaporama video.fade-out { opacity: 0; transform: scale(0.98); }
+    .diaporama img.fade-out { opacity: 0; transform: scale(0.98); }
 
     figcaption { margin-top: 10px; font-size: 0.95rem; color: var(--accent); min-height: 1.2em; }
     .controls { margin-top: 10px; }
@@ -49,23 +49,27 @@
 
     /* Plein écran */
     .fullscreen {
-      position: fixed; top: 0; left: 0;
+      position: fixed;
+      top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.9);
-      display: flex; justify-content: center; align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       z-index: 9999;
-      visibility: hidden; opacity: 0;
+      visibility: hidden;
+      opacity: 0;
       transition: opacity 0.3s ease;
     }
     .fullscreen.active { visibility: visible; opacity: 1; }
-    .fullscreen img, .fullscreen video {
+    .fullscreen img {
       max-width: 90%; max-height: 90%;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(255,255,255,0.3);
       transition: transform 0.3s ease;
       transform: scale(0.95);
     }
-    .fullscreen.active img, .fullscreen.active video { transform: scale(1); }
+    .fullscreen.active img { transform: scale(1); }
 
     .nav-btn {
       position: absolute; top: 50%;
@@ -79,9 +83,13 @@
     .prev { left: 20px; }
     .next { right: 20px; }
     .close {
-      position: absolute; top: 20px; right: 30px;
-      font-size: 2rem; cursor: pointer;
-      color: white; background: none; border: none;
+      position: absolute;
+      top: 20px; right: 30px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+      background: none;
+      border: none;
     }
 
     @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
@@ -90,108 +98,209 @@
 </head>
 <body>
   <h1>📸 Galerie de Souvenirs LFGOOO</h1>
-  <p class="subtitle">Parce que j’ai passé mes plus belles années lycéennes avec vous… et parce que chaque souvenir mérite sa place, même quand je manque d’espace !</p>
+  <p class="subtitle">Parce que j’ai passé mes plus belles années lycéennes avec vous… 
+    et parce que chaque souvenir mérite sa place, même quand je manque d’espace !</p>
 
   <div class="grid">
-
-    <!-- Walibi 2024 avec vidéo -->
+    <!-- Bruxelles -->
     <div class="theme">
-      <h2>Walibi 2024 🎢</h2>
-      <figure class="diaporama" onclick="openFullscreen(['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg','walibi2024_9.jpg','walibi2024_10.jpg','walibi2024_11.jpg','walibi2024_12.jpg','walibi2024_13.jpg','walibi2024_14.mp4'], 0)">
+      <h2>Bruxelles</h2>
+      <figure class="diaporama" onclick="openFullscreen(['bruxelles1.jpg','bruxelles2.jpg','bruxelles3.jpg','bruxelles4.jpg','bruxelles5.jpg','bruxelles6.jpg'], 0)">
+        <img src="bruxelles1.jpg" alt="Bruxelles">
+        <figcaption>Notre effet papillon</figcaption>
+      </figure>
+      <div class="controls">
+        <button onclick="changeImage(this, ['bruxelles1.jpg','bruxelles2.jpg','bruxelles3.jpg','bruxelles4.jpg','bruxelles5.jpg','bruxelles6.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['bruxelles1.jpg','bruxelles2.jpg','bruxelles3.jpg','bruxelles4.jpg','bruxelles5.jpg','bruxelles6.jpg'])">➡</button>
+      </div>
+    </div>
+
+    <!-- Walibi 2024 -->
+    <div class="theme">
+      <h2>Walibi 2024</h2>
+      <figure class="diaporama" onclick="openFullscreen(['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg','walibi2024_9.jpg','walibi2024_10.jpg','walibi2024_11.jpg','walibi2024_12.jpg','walibi2024_13.jpg'], 0)">
         <img src="walibi2024_1.jpg" alt="Walibi 2024">
         <figcaption>LFGOO à Walibi ! 😱</figcaption>
       </figure>
       <div class="controls">
-        <button onclick="changeImage(this, ['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg','walibi2024_9.jpg','walibi2024_10.jpg','walibi2024_11.jpg','walibi2024_12.jpg','walibi2024_13.jpg','walibi2024_14.mp4'])">⬅</button>
-        <button onclick="changeImage(this, ['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg','walibi2024_9.jpg','walibi2024_10.jpg','walibi2024_11.jpg','walibi2024_12.jpg','walibi2024_13.jpg','walibi2024_14.mp4'])">➡</button>
+        <button onclick="changeImage(this, ['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg','walibi2024_9.jpg','walibi2024_10.jpg','walibi2024_11.jpg','walibi2024_12.jpg','walibi2024_13.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['walibi2024_1.jpg','walibi2024_2.jpg','walibi2024_3.jpg','walibi2024_4.jpg','walibi2024_5.jpg','walibi2024_6.jpg','walibi2024_7.jpg','walibi2024_8.jpg','walibi2024_9.jpg','walibi2024_10.jpg','walibi2024_11.jpg','walibi2024_12.jpg','walibi2024_13.jpg'])">➡</button>
       </div>
     </div>
 
+    <!-- Ski -->
+    <div class="theme">
+      <h2>Ski</h2>
+      <figure class="diaporama" onclick="openFullscreen(['ski1.jpg','ski2.jpg','ski3.jpg','ski4.jpg','ski5.jpg'], 0)">
+        <img src="ski1.jpg" alt="Ski">
+        <figcaption>⛷️ Ski</figcaption>
+      </figure>
+      <div class="controls">
+        <button onclick="changeImage(this, ['ski1.jpg','ski2.jpg','ski3.jpg','ski4.jpg','ski5.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['ski1.jpg','ski2.jpg','ski3.jpg','ski4.jpg','ski5.jpg'])">➡</button>
+      </div>
+    </div>
+
+    <!-- Walibi 2025 -->
+    <div class="theme">
+      <h2>Walibi 2025</h2>
+      <figure class="diaporama" onclick="openFullscreen(['walibi2025_1.jpg','walibi2025_2.jpg'], 0)">
+        <img src="walibi2025_1.jpg" alt="Walibi 2025">
+        <figcaption>🎢 Walibi 2025</figcaption>
+      </figure>
+      <div class="controls">
+        <button onclick="changeImage(this, ['walibi2025_1.jpg','walibi2025_2.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['walibi2025_1.jpg','walibi2025_2.jpg'])">➡</button>
+      </div>
+    </div>
+
+    <!-- Autres moments -->
+    <div class="theme">
+      <h2>Autres moments</h2>
+      <figure class="diaporama" onclick="openFullscreen(['autres_1.jpg','autres_2.jpg','autres_3.jpg','autres_4.jpg','autres_5.jpg','autres_6.jpg','autres_7.jpg'], 0)">
+        <img src="autres_1.jpg" alt="Autres">
+        <figcaption>Repas surprise 🍽️</figcaption>
+      </figure>
+      <div class="controls">
+        <button onclick="changeImage(this, ['autres_1.jpg','autres_2.jpg','autres_3.jpg','autres_4.jpg','autres_5.jpg','autres_6.jpg','autres_7.jpg'])">⬅</button>
+        <button onclick="changeImage(this, ['autres_1.jpg','autres_2.jpg','autres_3.jpg','autres_4.jpg','autres_5.jpg','autres_6.jpg','autres_7.jpg'])">➡</button>
+      </div>
+    </div>
   </div>
 
   <!-- Plein écran -->
   <div id="fullscreen" class="fullscreen">
     <button class="close" onclick="closeFullscreen()">✖</button>
     <button class="nav-btn prev" onclick="navigateFullscreen(-1)">⬅</button>
-    <img id="fsImage" src="" alt="">
-    <video id="fsVideo" controls></video>
+    <img src="" alt="Zoom">
     <button class="nav-btn next" onclick="navigateFullscreen(1)">➡</button>
   </div>
 
   <script>
+    let diaporamas = [];
     let fsImages = [];
     let fsIndex = 0;
 
-    function isVideo(file) {
-      return file.endsWith('.mp4') || file.endsWith('.webm') || file.endsWith('.mov');
-    }
-
     function changeImage(button, images) {
-      const figure = button.closest('.theme').querySelector('.diaporama');
-      const media = figure.querySelector('img, video');
-      const currentSrc = media.getAttribute('src');
+      const figure = button.closest('.theme').querySelector('.diaporama img');
+      const currentSrc = figure.getAttribute('src');
       let index = images.indexOf(currentSrc);
       if (button.textContent === '➡') index = (index + 1) % images.length;
       else index = (index - 1 + images.length) % images.length;
-
-      const next = images[index];
-      media.classList.add('fade-out');
+      figure.classList.add('fade-out');
       setTimeout(() => {
-        if (isVideo(next)) {
-          figure.innerHTML = `<video src="${next}" muted autoplay loop></video>`;
-        } else {
-          figure.innerHTML = `<img src="${next}" alt="">`;
-        }
+        figure.src = images[index];
+        figure.classList.remove('fade-out');
       }, 360);
     }
 
+    document.querySelectorAll('.theme').forEach(theme => {
+      const imgs = Array.from(theme.querySelectorAll('button'))[0]?.onclick.toString().match(/'([^']+)'/g)?.map(x => x.replace(/'/g, ''));
+      if (!imgs) return;
+      const img = theme.querySelector('.diaporama img');
+      let index = 0;
+
+      const interval = setInterval(() => {
+        index = (index + 1) % imgs.length;
+        img.classList.add('fade-out');
+        setTimeout(() => {
+          img.src = imgs[index];
+          img.classList.remove('fade-out');
+        }, 360);
+      }, 3000);
+
+      diaporamas.push({ interval });
+    });
+
     function openFullscreen(images, index) {
+      diaporamas.forEach(d => clearInterval(d.interval));
       fsImages = images;
       fsIndex = index;
       const fs = document.getElementById('fullscreen');
-      const img = document.getElementById('fsImage');
-      const vid = document.getElementById('fsVideo');
-      const current = images[index];
-
-      if (isVideo(current)) {
-        img.style.display = 'none';
-        vid.style.display = 'block';
-        vid.src = current;
-        vid.play();
-      } else {
-        vid.pause();
-        vid.style.display = 'none';
-        img.style.display = 'block';
-        img.src = current;
-      }
+      fs.querySelector('img').src = images[index];
       fs.classList.add('active');
     }
 
     function closeFullscreen() {
-      const fs = document.getElementById('fullscreen');
-      const vid = document.getElementById('fsVideo');
-      vid.pause();
-      fs.classList.remove('active');
+      document.getElementById('fullscreen').classList.remove('active');
+      setTimeout(() => restartSlides(), 500);
+    }
+
+    function restartSlides() {
+      diaporamas = [];
+      document.querySelectorAll('.theme').forEach(theme => {
+        const imgs = Array.from(theme.querySelectorAll('button'))[0]?.onclick.toString().match(/'([^']+)'/g)?.map(x => x.replace(/'/g, ''));
+        if (!imgs) return;
+        const img = theme.querySelector('.diaporama img');
+        let index = imgs.indexOf(img.src.split('/').pop());
+        const interval = setInterval(() => {
+          index = (index + 1) % imgs.length;
+          img.classList.add('fade-out');
+          setTimeout(() => {
+            img.src = imgs[index];
+            img.classList.remove('fade-out');
+          }, 360);
+        }, 3000);
+        diaporamas.push({ interval });
+      });
     }
 
     function navigateFullscreen(dir) {
       fsIndex = (fsIndex + dir + fsImages.length) % fsImages.length;
-      const img = document.getElementById('fsImage');
-      const vid = document.getElementById('fsVideo');
-      const current = fsImages[fsIndex];
-
-      if (isVideo(current)) {
-        img.style.display = 'none';
-        vid.style.display = 'block';
-        vid.src = current;
-        vid.play();
-      } else {
-        vid.pause();
-        vid.style.display = 'none';
-        img.style.display = 'block';
-        img.src = current;
-      }
+      const img = document.getElementById('fullscreen').querySelector('img');
+      img.classList.add('fade-out');
+      setTimeout(() => {
+        img.src = fsImages[fsIndex];
+        img.classList.remove('fade-out');
+      }, 200);
     }
+
+    document.addEventListener('keydown', e => {
+      const fs = document.getElementById('fullscreen');
+      if (!fs.classList.contains('active')) return;
+      if (e.key === 'ArrowRight') navigateFullscreen(1);
+      if (e.key === 'ArrowLeft') navigateFullscreen(-1);
+      if (e.key === 'Escape') closeFullscreen();
+    });
+
+    /* ----- Swipe mobile ----- */
+    let touchStartX = 0, touchEndX = 0;
+    const fullscreen = document.getElementById('fullscreen');
+
+    fullscreen.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    fullscreen.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) navigateFullscreen(-1);
+        else navigateFullscreen(1);
+      }
+    });
+
+    document.querySelectorAll('.diaporama').forEach(diap => {
+      let startX = 0, endX = 0;
+      diap.addEventListener('touchstart', e => {
+        startX = e.changedTouches[0].screenX;
+      });
+      diap.addEventListener('touchend', e => {
+        endX = e.changedTouches[0].screenX;
+        const diff = endX - startX;
+        if (Math.abs(diff) > 50) {
+          const theme = diap.closest('.theme');
+          const imgs = Array.from(theme.querySelectorAll('button'))[0]
+            ?.onclick.toString()
+            .match(/'([^']+)'/g)
+            ?.map(x => x.replace(/'/g, ''));
+          if (!imgs) return;
+          const fakeButton = document.createElement('button');
+          fakeButton.textContent = diff > 0 ? '⬅' : '➡';
+          changeImage(fakeButton, imgs);
+        }
+      });
+    });
   </script>
 </body>
 </html>
