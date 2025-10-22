@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Accès privé</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { 
+  display:flex; 
+  justify-content:center; 
+  align-items:center; 
+  height:100vh; 
+  font-family:Arial,sans-serif; 
+  background: linear-gradient(to right, #00c9ff, #92fe9d); 
+  color: #fff; 
+  text-align:center; 
+  margin:0;
+}
+input { 
+  padding:10px; 
+  border-radius:5px; 
+  border:none; 
+  margin-top:10px; 
+  font-size:1rem;
+}
+button { 
+  padding:10px 16px; 
+  border:none; 
+  border-radius:5px; 
+  background:#fff; 
+  color:#00c9ff; 
+  font-weight:700; 
+  margin-top:10px; 
+  cursor:pointer; 
+  font-size:1rem;
+}
+button:hover { background:#f0f0f0; }
+</style>
+</head>
+<body>
+<div>
+  <h1>🔒 Accès privé</h1>
+  <p>Entrez le mot de passe pour accéder à la galerie :</p>
+  <input type="password" id="pwd" placeholder="Mot de passe">
+  <br>
+  <button onclick="checkPassword()">Entrer</button>
+</div>
+
+<script>
+function checkPassword() {
+  const pwd = document.getElementById('pwd').value;
+  // CHANGEZ 'lyceen2025' par le mot de passe que vous voulez
+  if(pwd === 'lyceen2025') {
+    window.location.href = 'LFGOOO.html'; // nom de ton fichier galerie
+  } else {
+    alert('Mot de passe incorrect !');
+  }
+}
+</script>
+</body>
+</html>
