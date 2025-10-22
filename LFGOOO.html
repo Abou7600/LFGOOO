@@ -213,7 +213,7 @@
     });
 
     function openFullscreen(images, index) {
-      diaporamas.forEach(d => clearInterval(d.interval)); // pause auto
+      diaporamas.forEach(d => clearInterval(d.interval));
       fsImages = images;
       fsIndex = index;
       const fs = document.getElementById('fullscreen');
@@ -223,7 +223,7 @@
 
     function closeFullscreen() {
       document.getElementById('fullscreen').classList.remove('active');
-      setTimeout(() => restartSlides(), 500); // reprise auto
+      setTimeout(() => restartSlides(), 500);
     }
 
     function restartSlides() {
@@ -261,6 +261,45 @@
       if (e.key === 'ArrowRight') navigateFullscreen(1);
       if (e.key === 'ArrowLeft') navigateFullscreen(-1);
       if (e.key === 'Escape') closeFullscreen();
+    });
+
+    /* ----- Swipe mobile ----- */
+    let touchStartX = 0, touchEndX = 0;
+    const fullscreen = document.getElementById('fullscreen');
+
+    fullscreen.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    fullscreen.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) navigateFullscreen(-1);
+        else navigateFullscreen(1);
+      }
+    });
+
+    document.querySelectorAll('.diaporama').forEach(diap => {
+      let startX = 0, endX = 0;
+      diap.addEventListener('touchstart', e => {
+        startX = e.changedTouches[0].screenX;
+      });
+      diap.addEventListener('touchend', e => {
+        endX = e.changedTouches[0].screenX;
+        const diff = endX - startX;
+        if (Math.abs(diff) > 50) {
+          const theme = diap.closest('.theme');
+          const imgs = Array.from(theme.querySelectorAll('button'))[0]
+            ?.onclick.toString()
+            .match(/'([^']+)'/g)
+            ?.map(x => x.replace(/'/g, ''));
+          if (!imgs) return;
+          const fakeButton = document.createElement('button');
+          fakeButton.textContent = diff > 0 ? '⬅' : '➡';
+          changeImage(fakeButton, imgs);
+        }
+      });
     });
   </script>
 </body>
